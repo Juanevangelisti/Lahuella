@@ -62,14 +62,14 @@ img { display: block; max-width: 100%; }
   z-index: 50;
   background: var(--cream);
   border-bottom: 1px solid var(--line);
-  padding: 14px 32px;
+  padding: 10px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .site-header__mark {
-  height: 60px;
+  height: 40px;
 }
 
 .btn.btn--small {
@@ -78,15 +78,15 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 640px) {
-  .site-header { padding: 12px 22px; }
-  .site-header__mark { height: 48px; }
+  .site-header { padding: 8px 22px; }
+  .site-header__mark { height: 34px; }
 }
 
 /* ---------- Hero ---------- */
 
 .hero {
   position: relative;
-  height: calc(92vh - 90px);
+  height: calc(92vh - 62px);
   min-height: 520px;
   display: flex;
   align-items: flex-end;
