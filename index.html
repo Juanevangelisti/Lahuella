@@ -296,5 +296,46 @@
 
 <a class="wa-float" href="https://wa.me/5493547577756" target="_blank" rel="noopener">WhatsApp</a>
 
+<script>
+  // Recorrido automático de la galería de fotos (filmstrip).
+  // Avanza sola cada 3.2s, vuelve al principio al llegar al final,
+  // y se pausa un rato si el usuario la toca o la scrollea a mano.
+  document.addEventListener('DOMContentLoaded', function () {
+    var strip = document.querySelector('.filmstrip');
+    if (!strip) return;
+
+    var timer = null;
+    var resumeTimeout = null;
+
+    function step() {
+      var frame = strip.querySelector('.frame');
+      if (!frame) return;
+      var gapValue = parseInt(getComputedStyle(strip).columnGap || getComputedStyle(strip).gap) || 26;
+      var advance = frame.getBoundingClientRect().width + gapValue;
+      var maxScroll = strip.scrollWidth - strip.clientWidth - 4;
+      if (strip.scrollLeft >= maxScroll) {
+        strip.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        strip.scrollBy({ left: advance, behavior: 'smooth' });
+      }
+    }
+
+    function start() {
+      timer = setInterval(step, 3200);
+    }
+
+    function pauseAndResume() {
+      clearInterval(timer);
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(start, 6000);
+    }
+
+    start();
+    ['mousedown', 'touchstart', 'wheel'].forEach(function (evt) {
+      strip.addEventListener(evt, pauseAndResume, { passive: true });
+    });
+  });
+</script>
+
 </body>
 </html>

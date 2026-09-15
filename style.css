@@ -69,12 +69,12 @@ img { display: block; max-width: 100%; }
 }
 
 .site-header__mark {
-  height: 58px;
+  height: 74px;
 }
 
 .site-header__nav {
   display: flex;
-  gap: 48px;
+  gap: 88px;
 }
 
 .site-header__nav a {
@@ -99,14 +99,14 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 640px) {
   .site-header { padding: 10px 22px; }
-  .site-header__mark { height: 46px; }
+  .site-header__mark { height: 54px; }
 }
 
 /* ---------- Hero ---------- */
 
 .hero {
   position: relative;
-  height: calc(92vh - 80px);
+  height: calc(92vh - 100px);
   min-height: 520px;
   display: flex;
   align-items: flex-end;
