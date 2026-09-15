@@ -74,7 +74,7 @@ img { display: block; max-width: 100%; }
 
 .site-header__nav {
   display: flex;
-  gap: 32px;
+  gap: 48px;
 }
 
 .site-header__nav a {
