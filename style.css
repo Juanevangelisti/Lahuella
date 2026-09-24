@@ -302,10 +302,14 @@ img { display: block; max-width: 100%; }
 
 .gallery__house-label--cholito::before { background: var(--sage-deep); }
 
-.gallery > .wrap + .filmstrip { margin-top: -6px; }
+.gallery > .wrap + .filmstrip-wrap { margin-top: -6px; }
 .gallery > .wrap:not(:first-child) { margin-top: 20px; }
 
 /* Vista panoramica del predio, entre la intro y las dos casas */
+.panorama {
+  position: relative;
+}
+
 .panorama img {
   width: 100%;
   height: 46vh;
@@ -313,45 +317,111 @@ img { display: block; max-width: 100%; }
   max-height: 460px;
   object-fit: cover;
   display: block;
+  filter: saturate(0.72) contrast(0.94) brightness(1.03) sepia(0.06);
+}
+
+.panorama::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, var(--cream) 0%, rgba(247,241,228,0) 14%, rgba(247,241,228,0) 86%, var(--cream) 100%),
+    linear-gradient(90deg, rgba(139,79,43,0.10) 0%, rgba(139,79,43,0) 20%, rgba(139,79,43,0) 80%, rgba(139,79,43,0.10) 100%);
+}
+
+.filmstrip-wrap {
+  position: relative;
 }
 
 .filmstrip {
   display: flex;
-  gap: 26px;
+  gap: 22px;
   overflow-x: auto;
-  padding: 30px 32px 20px;
+  padding: 12px 32px 14px;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
 }
 
-.filmstrip::-webkit-scrollbar { height: 8px; }
-.filmstrip::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+.filmstrip::-webkit-scrollbar { display: none; }
+.filmstrip { scrollbar-width: none; }
 
-.frame {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
+.filmstrip-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
   background: #fff;
-  padding: 10px 10px 34px;
-  box-shadow: 0 10px 24px rgba(46,42,34,0.14);
-  transform: rotate(var(--tilt, 0deg));
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 22px rgba(46,42,34,0.20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  color: var(--ink);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
-.frame:nth-child(odd) { --tilt: -1.1deg; }
-.frame:nth-child(even) { --tilt: 1.3deg; }
+.filmstrip-nav svg { width: 20px; height: 20px; }
+.filmstrip-nav:hover { background: var(--terracota); color: #fff; border-color: var(--terracota); }
+.filmstrip-nav--prev { left: 6px; }
+.filmstrip-nav--next { right: 6px; }
+
+@media (max-width: 760px) {
+  .filmstrip-nav { display: none; }
+}
+
+.frame {
+  position: relative;
+  flex: 0 0 auto;
+  width: 300px;
+  height: 370px;
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  box-shadow: 0 16px 34px rgba(46,42,34,0.20);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.frame:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px rgba(46,42,34,0.26);
+}
 
 .frame img {
-  height: 300px;
-  width: auto;
-  max-width: 380px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,15,10,0) 52%, rgba(18,13,9,0.82) 100%);
+  pointer-events: none;
 }
 
 .frame span {
-  display: block;
-  text-align: center;
-  font-size: 13px;
-  color: var(--ink-soft);
-  padding-top: 12px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 20px 20px 18px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+  .frame { width: 240px; height: 310px; }
 }
 
 @media (max-width: 640px) {
