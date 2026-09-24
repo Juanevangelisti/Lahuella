@@ -282,6 +282,39 @@ img { display: block; max-width: 100%; }
 .gallery__head h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
 .gallery__head p { color: var(--ink-soft); margin-top: 10px; }
 
+.gallery__house-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.gallery__house-label::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--terracota);
+}
+
+.gallery__house-label--cholito::before { background: var(--sage-deep); }
+
+.gallery > .wrap + .filmstrip { margin-top: -6px; }
+.gallery > .wrap:not(:first-child) { margin-top: 20px; }
+
+/* Vista panoramica del predio, entre la intro y las dos casas */
+.panorama img {
+  width: 100%;
+  height: 46vh;
+  min-height: 320px;
+  max-height: 460px;
+  object-fit: cover;
+  display: block;
+}
+
 .filmstrip {
   display: flex;
   gap: 26px;
@@ -323,6 +356,44 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 640px) {
   .frame img { height: 230px; max-width: 280px; }
+}
+
+/* ---------- Servicios opcionales (desayuno, masajes) ---------- */
+
+.extras {
+  padding: 20px 0 90px;
+}
+
+.extras__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.extra-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--terracota);
+  padding: 30px 32px;
+}
+
+.extra-card:nth-child(2) { border-top-color: var(--sage-deep); }
+
+.extra-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.extra-card p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .extras__grid { grid-template-columns: 1fr; }
 }
 
 /* ---------- Las dos casas (Isabel / Cholito 2) ---------- */

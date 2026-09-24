@@ -88,6 +88,10 @@
   </div>
 </section>
 
+<section class="panorama">
+  <img src="img/predio-panoramica.jpg" alt="Vista panorámica del predio con las dos casas, Isabel y Cholito 2, el jardín y el playón cubierto">
+</section>
+
 <section id="casas" class="houses">
   <div class="wrap">
     <div class="houses__grid">
@@ -143,15 +147,27 @@
 <section class="gallery">
   <div class="gallery__head wrap">
     <h2>Un recorrido por adentro</h2>
-    <p>Cocina equipada, living-comedor y ambientes cálidos en los dos departamentos.</p>
+    <p>Así es cada uno de los dos departamentos, por dentro.</p>
+  </div>
+
+  <div class="wrap">
+    <h3 class="gallery__house-label gallery__house-label--isabel">Isabel</h3>
   </div>
   <div class="filmstrip">
     <figure class="frame"><img src="img/PHOTO-2026-07-20-19-51-27_5.jpg" alt="Dormitorio con cama doble y mesas de luz a ambos lados"><span>Dormitorio</span></figure>
     <figure class="frame"><img src="img/PHOTO-2026-07-20-19-51-27.jpg" alt="Living con sofá, TV y pared de ladrillo visto"><span>Living</span></figure>
     <figure class="frame"><img src="img/PHOTO-2026-07-20-19-51-25.jpg" alt="Cocina equipada con horno, anafe y calefón"><span>Cocina</span></figure>
     <figure class="frame"><img src="img/PHOTO-2026-07-20-19-51-24_2.jpg" alt="Baño con bacha de piedra sobre mueble de madera"><span>Baño</span></figure>
-    <figure class="frame"><img src="img/PHOTO-2026-07-20-19-51-26.jpg" alt="Vista desde la ventana hacia las reposeras del jardín"><span>Vista al jardín</span></figure>
-    <figure class="frame"><img src="img/PHOTO-2026-07-20-19-51-25_4.jpg" alt="Pileta con palmera al fondo"><span>Pileta</span></figure>
+  </div>
+
+  <div class="wrap">
+    <h3 class="gallery__house-label gallery__house-label--cholito">Cholito 2</h3>
+  </div>
+  <div class="filmstrip">
+    <figure class="frame"><img src="img/cholito2-living.jpg" alt="Comedor y living con TV, junto a la cocina"><span>Living-comedor</span></figure>
+    <figure class="frame"><img src="img/cholito2-cocina.jpg" alt="Cocina equipada con horno, anafe y campana"><span>Cocina</span></figure>
+    <figure class="frame"><img src="img/cholito2-dormitorio-doble.jpg" alt="Dormitorio con cama doble y aire acondicionado"><span>Dormitorio doble</span></figure>
+    <figure class="frame"><img src="img/cholito2-dormitorio-individual.jpg" alt="Dormitorio con dos camas individuales"><span>Dormitorio individual</span></figure>
   </div>
 </section>
 
@@ -174,7 +190,24 @@
       <li>Jardín parquizado</li>
     </ul>
   </div>
-  <p class="wrap amenities__note">No cuentan con lavarropas propio, pero hay lavandería a pasos. No se ofrece desayuno, aunque la cocina está totalmente equipada para prepararlo — y a 60 metros hay panaderías.</p>
+  <p class="wrap amenities__note">No cuentan con lavarropas propio, pero hay lavandería a pasos. La cocina está totalmente equipada para cocinar, y a 60 metros hay panaderías.</p>
+</section>
+
+<section id="servicios-opcionales" class="extras">
+  <div class="wrap">
+    <p class="split__label">Para sumar a la estadía</p>
+    <h2>Servicios opcionales</h2>
+    <div class="extras__grid">
+      <article class="extra-card">
+        <h3>Desayuno</h3>
+        <p>Pan casero, infusión, jugo de naranja recién exprimido, jamón y queso, y untables (mermelada, manteca). Precio a consultar.</p>
+      </article>
+      <article class="extra-card">
+        <h3>Masajes Kaolif</h3>
+        <p>Hay un estudio dentro del predio donde Victoria da masajes Kaolif. Turnos y precios se coordinan directamente con ella.</p>
+      </article>
+    </div>
+  </div>
 </section>
 
 <section id="ubicacion" class="location wrap">
@@ -297,42 +330,41 @@
 <a class="wa-float" href="https://wa.me/5493547577756" target="_blank" rel="noopener">WhatsApp</a>
 
 <script>
-  // Recorrido automático de la galería de fotos (filmstrip).
-  // Avanza sola cada 3.2s, vuelve al principio al llegar al final,
+  // Recorrido automático de las galerías de fotos (filmstrip).
+  // Cada galería avanza sola cada 3.2s, vuelve al principio al llegar al final,
   // y se pausa un rato si el usuario la toca o la scrollea a mano.
   document.addEventListener('DOMContentLoaded', function () {
-    var strip = document.querySelector('.filmstrip');
-    if (!strip) return;
+    document.querySelectorAll('.filmstrip').forEach(function (strip) {
+      var timer = null;
+      var resumeTimeout = null;
 
-    var timer = null;
-    var resumeTimeout = null;
-
-    function step() {
-      var frame = strip.querySelector('.frame');
-      if (!frame) return;
-      var gapValue = parseInt(getComputedStyle(strip).columnGap || getComputedStyle(strip).gap) || 26;
-      var advance = frame.getBoundingClientRect().width + gapValue;
-      var maxScroll = strip.scrollWidth - strip.clientWidth - 4;
-      if (strip.scrollLeft >= maxScroll) {
-        strip.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        strip.scrollBy({ left: advance, behavior: 'smooth' });
+      function step() {
+        var frame = strip.querySelector('.frame');
+        if (!frame) return;
+        var gapValue = parseInt(getComputedStyle(strip).columnGap || getComputedStyle(strip).gap) || 26;
+        var advance = frame.getBoundingClientRect().width + gapValue;
+        var maxScroll = strip.scrollWidth - strip.clientWidth - 4;
+        if (strip.scrollLeft >= maxScroll) {
+          strip.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          strip.scrollBy({ left: advance, behavior: 'smooth' });
+        }
       }
-    }
 
-    function start() {
-      timer = setInterval(step, 3200);
-    }
+      function start() {
+        timer = setInterval(step, 3200);
+      }
 
-    function pauseAndResume() {
-      clearInterval(timer);
-      clearTimeout(resumeTimeout);
-      resumeTimeout = setTimeout(start, 6000);
-    }
+      function pauseAndResume() {
+        clearInterval(timer);
+        clearTimeout(resumeTimeout);
+        resumeTimeout = setTimeout(start, 6000);
+      }
 
-    start();
-    ['mousedown', 'touchstart', 'wheel'].forEach(function (evt) {
-      strip.addEventListener(evt, pauseAndResume, { passive: true });
+      start();
+      ['mousedown', 'touchstart', 'wheel'].forEach(function (evt) {
+        strip.addEventListener(evt, pauseAndResume, { passive: true });
+      });
     });
   });
 </script>
